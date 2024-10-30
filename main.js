@@ -26,7 +26,13 @@ function updateRadio(options) {
 
 
 function getYous() {
-  return ["poppin'", "packin'"]
+  getOptions()
+  .then((data) => {
+    return data
+  })
+  .catch((error) => {
+    console.error(error)
+  })
 }
 
 function getThey(you) {
@@ -62,7 +68,13 @@ function changed(ev) {
   // FIXME: notice above that getThemProblem just returns a literal.
   // you should update the code below to instead call getThemProblem.
   // getThemProblem expects a string parameter (the only valid strings are those returned by getOptions), and returns a promise that resolves to a string.
-  const they = getThey(you)
+  let they = getThemProblem(you)
+  .then((data) => {
+    they = data
+  })
+  .catch((error) => {
+    they = ""
+  })
   const output = document.getElementById('they')
   output.textContent = they
 }
